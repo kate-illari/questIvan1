@@ -55,13 +55,14 @@
 
     // Check if the answer is correct
     expectedAnswer = data[currentQuestion].a;
-    if(currentQuestion === data.length - 1){
-      alert("DECODER ACTIVATED");
-      document.getElementById("question").style.display = "none";
-      document.getElementById("answer").style.display = "none";
-      document.getElementById("button").style.display = "none";
-      document.getElementById("decoder").style.display = "block";
-      document.getElementById("decoder").innerHTML = `
+    if (userAnswer === expectedAnswer) {
+      if(currentQuestion === data.length - 1){
+        alert("DECODER ACTIVATED");
+        document.getElementById("question").style.display = "none";
+        document.getElementById("answer").style.display = "none";
+        document.getElementById("button").style.display = "none";
+        document.getElementById("decoder").style.display = "block";
+        document.getElementById("decoder").innerHTML = `
             А = &#9730,
             Б = &#9751,
             В = &#9731,
@@ -80,9 +81,10 @@
             Ш = &#9736,
             Я = &#9775,
       `
-    } else if (userAnswer === expectedAnswer) {
-      currentQuestion++;
-      alert("Correct, continue the quiz");
+      } else {
+        currentQuestion++;
+        alert("Correct, continue the quiz");
+      }
     } else {
       currentQuestion = 0;
       alert("Incorrect, restarting the quiz");
