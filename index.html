@@ -29,7 +29,7 @@
       a: "16 наград",
     },
     {
-      q: "Как пагодка?",
+      q: "Как пагодка, Майлз?",
       a: "Снєжок",
     },
     {
@@ -55,7 +55,7 @@
 
     // Check if the answer is correct
     expectedAnswer = data[currentQuestion].a;
-    if (userAnswer === expectedAnswer) {
+    if (userAnswer.toLowerCase() === expectedAnswer) {
       if(currentQuestion === data.length - 1){
         alert("DECODER ACTIVATED");
         document.getElementById("question").style.display = "none";
@@ -86,7 +86,6 @@
         alert("Correct, continue the quiz");
       }
     } else {
-      currentQuestion = 0;
       alert("Incorrect, restarting the quiz");
     }
 
