@@ -1,16 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Wheel</title>
-    <script src="js/pixi.js"></script>
-    <script src="js/pixi-spine.js"></script>
-    <script src="js/core.js"></script>
-    <script src="js/Observable.js"></script>
-    <script src="js/AnimationUtils.js"></script>
+    <!-- Content Type Meta tag -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--Responsive Viewport Meta tag-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!-- FONT -->
+    <link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Coda" rel="stylesheet">
+    <!-- STYLES -->
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
-<body style="overflow: hidden; background-color: black">
-<script src="dist/js/bundle.js"></script>
+<body>
+
+<div class="login-page">
+    <div class="form">
+        <h2 id="question">Думаєш іх проста так дают?</h2>
+        <input type="text" id="answer" placeholder="Type your answer here">
+        <button id="button" onclick="checkAnswer()">SUBMIT</button>
+        <p id="decoder"></p>
+    </div>
+</div>
+
+<script>
+  const data = [
+    {
+      q: "Думаєш іх проста так дают?",
+      a: "16 наград",
+    },
+    {
+      q: "Как пагодка?",
+      a: "Снєжок",
+    },
+    {
+      q: "Скажений комбайн в тачках",
+      a: "Валєра",
+    },
+    {
+      q: "4, 8, 15, 16, 23, 42",
+      a: "Lost",
+    },
+  ]
+  // Initial question and expected answer
+  let currentQuestion = 0;
+  let expectedAnswer = "";
+  document.getElementById("decoder").style.display = "none";
+  document.getElementById("question").style.display = "block";
+  document.getElementById("answer").style.display = "block";
+  document.getElementById("button").style.display = "block";
+
+  function checkAnswer() {
+    // Get the user's answer from the input field
+    const userAnswer = document.getElementById("answer").value;
+
+    // Check if the answer is correct
+    expectedAnswer = data[currentQuestion].a;
+    if(currentQuestion === data.length - 1){
+      alert("DECODER ACTIVATED");
+      document.getElementById("question").style.display = "none";
+      document.getElementById("answer").style.display = "none";
+      document.getElementById("button").style.display = "none";
+      document.getElementById("decoder").style.display = "block";
+      document.getElementById("decoder").innerHTML = `
+            А = &#9730,
+            Б = &#9751,
+            В = &#9731,
+            З = &#9734,
+            Е = &#9739,
+            И = &#9789,
+            І = &#9741,
+            Й = &#9762,
+            К = &#9794,
+            Л = &#9737,
+            Н = &#9729,
+            О = &#9752,
+            Р = &#9786,
+            С = &#9728,
+            Т = &#9733,
+            Ш = &#9736,
+            Я = &#9775,
+      `
+    } else if (userAnswer === expectedAnswer) {
+      currentQuestion++;
+      alert("Correct, continue the quiz");
+    } else {
+      currentQuestion = 0;
+      alert("Incorrect, restarting the quiz");
+    }
+
+    // Increment the question number and update the question and expected answer
+    document.getElementById("question").innerText = data[currentQuestion].q;
+    document.getElementById("answer").value = ""; // Clear the input field
+    console.warn(currentQuestion);
+  }
+</script>
 
 </body>
 </html>
